@@ -17,7 +17,7 @@
         android:text="Configure My Experience"
         android:id="@+id/button"
         android:nestedScrollingEnabled="false"
-        android:onClick="startSettings"
+        android:onClick="goToConfiguationScreen"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp"

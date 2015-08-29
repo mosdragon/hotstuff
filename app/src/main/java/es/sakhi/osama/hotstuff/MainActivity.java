@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.Switch;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,15 +47,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pushToStart(View v) {
-        RadioButton button = (RadioButton) v;
+        Button button = (Button) v;
         if (!started) {
             button.setText("Starting Your Car");
             CarStartService.startCar(this);
+            //button.setText("Push to Stop");
         } else {
             button.setText("Push to Start");
 //            Stopping car
             CarStartService.stopCar(this);
-//            button.des
+           // button.
 //            deselect radio button
 
         }
@@ -61,13 +64,31 @@ public class MainActivity extends AppCompatActivity {
         started = !started;
     }
 
-    public void startSettings(View v) {
-        Button button = (Button) v;
-
-    }
-
     public void goToConfiguationScreen(View v) {
         Intent intent = new Intent(this, ConfigurationActivity.class);
         startActivity(intent);
+    }
+
+    public void saveConfigs(View v) {
+        //Defrost
+        //Front Window
+        Switch frontWindow = (Switch) findViewById(R.id.Front_Window);
+        boolean shouldFrontWindow = frontWindow.isChecked();
+        //Back Window
+        Switch backWindow = (Switch) findViewById(R.id.Rear_Window);
+        //Auto
+        Switch autoDefrost = (Switch) findViewById(R.id.Auto_Defrost);
+        boolean shouldAutoDefrost = autoDefrost.isChecked();
+
+        // Car Temperature
+        // Set Car Temperature
+        SeekBar temp = (SeekBar) findViewById(R.id.Set_Temp);
+        int tempValue = temp.getVerticalScrollbarPosition();
+        //Auto Temp
+        Switch autoTemp = (Switch) findViewById(R.id.Auto_Temp);
+        boolean shouldAutoTemp = autoTemp.isChecked();
+
+        //Fuel
+
     }
 }
