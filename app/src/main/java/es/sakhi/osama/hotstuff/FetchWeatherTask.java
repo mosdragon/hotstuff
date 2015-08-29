@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Base64;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -41,7 +42,7 @@ public class FetchWeatherTask extends AsyncTask<Void, Void, Void> {
     private Callback callback;
 
     public FetchWeatherTask(Callback callback) {
-        android.os.Debug.waitForDebugger();
+//        android.os.Debug.waitForDebugger();
         this.context = (Context) callback;
         this.callback = callback;
     }
@@ -88,6 +89,7 @@ public class FetchWeatherTask extends AsyncTask<Void, Void, Void> {
             temperature = temp_var.get("temp_f").getAsDouble();
 
         }
+        Log.d("test2", "twete");
             if (callback != null) {
                 callback.foundTemp(temperature);
             }

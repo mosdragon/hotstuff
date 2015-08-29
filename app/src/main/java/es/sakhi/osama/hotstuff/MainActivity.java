@@ -1,10 +1,13 @@
 package es.sakhi.osama.hotstuff;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,8 +64,21 @@ public class MainActivity extends AppCompatActivity {
 //            deselect radio button
 
         }
+        Log.d("test", "test");
+        beginServices();
 
         started = !started;
+    }
+
+    private void beginServices() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        CarDefrostService.startDefrostService(this);
+
+
+//        if (!(prefs.getBoolean(AppConstants.DEFROST_FRONT_WINDOW, false)) && !(prefs.getBoolean(AppConstants.AUTO_DEFROST, false)) &&
+//                !(prefs.getBoolean(AppConstants.DEFROST_BACK_WINDOW, false))) {
+//            CarDefrostService.startDefrostService(this);
+//        }
     }
 
     public void goToConfiguationScreen(View v) {
