@@ -1,12 +1,20 @@
 package es.sakhi.osama.hotstuff;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private boolean started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +42,32 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void pushToStart(View v) {
+        RadioButton button = (RadioButton) v;
+        if (!started) {
+            button.setText("Starting Your Car");
+            CarStartService.startCar(this);
+        } else {
+            button.setText("Push to Start");
+//            Stopping car
+            CarStartService.stopCar(this);
+//            button.des
+//            deselect radio button
+
+        }
+
+        started = !started;
+    }
+
+    public void startSettings(View v) {
+        Button button = (Button) v;
+
+    }
+
+    public void goToConfiguationScreen(View v) {
+        Intent intent = new Intent(this, ConfigurationActivity.class);
+        startActivity(intent);
     }
 }
