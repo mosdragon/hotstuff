@@ -1,9 +1,12 @@
 package es.sakhi.osama.hotstuff;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -34,5 +37,15 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void pushToStart(View v) {
+        Button button = (Button) v;
+        ((Button) v).setText("Starting Your Car");
+    }
+
+    public void startSettings(View v) {
+        Button button = (Button) v;
+
     }
 }
