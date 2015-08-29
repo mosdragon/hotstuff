@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
@@ -49,14 +50,16 @@ public class MainActivity extends AppCompatActivity {
     public void pushToStart(View v) {
         Button button = (Button) v;
         if (!started) {
-            button.setText("Starting Your Car");
-            CarStartService.startCar(this);
+            button.setText("Stop My Car");
+            button.setHighlightColor(getResources().getColor(R.color.accent));
+            //CarStartService.startCar(this);
             //button.setText("Push to Stop");
         } else {
-            button.setText("Push to Start");
+            button.setText("Start My Car");
 //            Stopping car
             CarStartService.stopCar(this);
-           // button.
+            button.setHighlightColor(getResources().getColor(R.color.primaryDark));
+//              button.setChecked(false);
 //            deselect radio button
 
         }
@@ -67,28 +70,5 @@ public class MainActivity extends AppCompatActivity {
     public void goToConfiguationScreen(View v) {
         Intent intent = new Intent(this, ConfigurationActivity.class);
         startActivity(intent);
-    }
-
-    public void saveConfigs(View v) {
-        //Defrost
-        //Front Window
-        Switch frontWindow = (Switch) findViewById(R.id.Front_Window);
-        boolean shouldFrontWindow = frontWindow.isChecked();
-        //Back Window
-        Switch backWindow = (Switch) findViewById(R.id.Rear_Window);
-        //Auto
-        Switch autoDefrost = (Switch) findViewById(R.id.Auto_Defrost);
-        boolean shouldAutoDefrost = autoDefrost.isChecked();
-
-        // Car Temperature
-        // Set Car Temperature
-        SeekBar temp = (SeekBar) findViewById(R.id.Set_Temp);
-        int tempValue = temp.getVerticalScrollbarPosition();
-        //Auto Temp
-        Switch autoTemp = (Switch) findViewById(R.id.Auto_Temp);
-        boolean shouldAutoTemp = autoTemp.isChecked();
-
-        //Fuel
-
     }
 }

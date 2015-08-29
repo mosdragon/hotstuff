@@ -95,8 +95,15 @@
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/Set_Temp"
-                        android:layout_marginBottom="3dp" />
+                        android:id="@+id/Set_Temp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="    0                 25                50                 75                100"
+                        android:id="@+id/textView"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="-5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,27 +137,29 @@
                     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:id="@+id/Fuel_Group">
+
 
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Closest To The Route"
-                            android:id="@+id/radioButton3"
+                            android:id="@+id/close"
                             android:layout_marginBottom="3dp" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Cheapest Within a 10 Mile Range"
-                            android:id="@+id/radioButton2"
+                            android:id="@+id/cheap"
                             android:layout_marginBottom="3dp" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Do Not Add"
-                            android:id="@+id/radioButton4"
+                            android:id="@+id/Do_Not_Add"
                             android:layout_marginBottom="5dp" />
                     </RadioGroup>
 
@@ -172,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:id="@+id/switch3"
+                        android:id="@+id/Heated_Seats"
                         android:layout_gravity="right" />
 
                     <TextView
@@ -185,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:id="@+id/switch4"
+                        android:id="@+id/Cooled_Seats"
                         android:layout_gravity="right"
                         android:layout_marginBottom="15dp" />
 
@@ -195,7 +204,8 @@
                         android:layout_height="wrap_content"
                         android:text="Save"
                         android:id="@+id/button2"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_gravity="center_horizontal"
+                        android:onClick="saveConfigs" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

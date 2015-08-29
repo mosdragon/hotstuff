@@ -1,8 +1,11 @@
 package es.sakhi.osama.hotstuff;
 
+import android.app.AlertDialog;
 import android.app.IntentService;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Context;
+import android.util.Log;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -11,7 +14,7 @@ import android.content.Context;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class CarDefrostService extends IntentService {
+public class CarDefrostService extends IntentService implements FetchWeatherTask.Callback {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_FOO = "es.sakhi.osama.hotstuff.action.FOO";
@@ -20,6 +23,8 @@ public class CarDefrostService extends IntentService {
     // TODO: Rename parameters
     private static final String EXTRA_PARAM1 = "es.sakhi.osama.hotstuff.extra.PARAM1";
     private static final String EXTRA_PARAM2 = "es.sakhi.osama.hotstuff.extra.PARAM2";
+
+    private Context context;
 
     /**
      * Starts this service to perform action Foo with the given parameters. If
@@ -71,6 +76,9 @@ public class CarDefrostService extends IntentService {
         }
     }
 
+
+
+
     /**
      * Handle action Foo in the provided background thread with the provided
      * parameters.
@@ -87,5 +95,50 @@ public class CarDefrostService extends IntentService {
     private void handleActionBaz(String param1, String param2) {
         // TODO: Handle action Baz
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void foundTemp(double temp) {
+        if (temp < 35){
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            Log.d("CarDefrostService", "Positive");
+                            dialog.dismiss();//Yes button clicked
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            dialog.dismiss();//No button clicked
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("The Temperature right now is " + temp + "ºF. Would you like to defrost?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
+        if (temp > 70){
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            Log.d("CarACService", "Positive");
+                            dialog.dismiss();//Yes button clicked
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            dialog.dismiss();//No button clicked
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("The Temperature right now is " + temp + "ºF. Would you like to turn on the AC?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
     }
 }

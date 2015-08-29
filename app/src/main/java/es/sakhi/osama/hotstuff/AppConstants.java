@@ -10,6 +10,9 @@ public interface AppConstants {
 
     String TOKEN_ENDPOINT = "https://developer.gm.com/api/v1/oauth/access_token";
     String API_ENDPOINT = "https://developer.gm.com/api/v1/";
+//    state, city
+    String WEATHER_ENDPOINT_TEMPLATE = "http://api.wunderground.com/api/91a6fb7a08a58439/conditions/q/%s/%s.json";
+
 
 //    Must format with vin #
     String VEHICLE_COMMANDS = API_ENDPOINT + "account/vehicles/"+ DEFAULT_VIN +"/commands/";
@@ -26,7 +29,22 @@ public interface AppConstants {
     String EXPIRES_IN = "expires_in";
     String EXPIRATION_DATE = "expiration_date";
 
+
     String COMMAND_RESPONSE = "commandResponse";
     String STATUS  = "status";
     String IN_PROGRESS = "inProgress";
+
+//    Config Keys
+
+    String DEFROST_FRONT_WINDOW = "defrost_front_window";
+    String DEFROST_BACK_WINDOW = "defrost_back_window";
+    String AUTO_DEFROST = "auto_defrost";
+    String SET_TEMP_TO = "set_temp_to";
+    String AUTO_TEMP = "auto_temp";
+    String FIND_CLOSE_GAS = "find_close_gas";
+    String FIND_CHEAP_GAS = "find_cheap_gas";
+    String FIND_NO_GAS = "find_no_gas";
+    String ACTIVATE_HEATED_SEATS = "activate_heated_seats";
+    String ACTIVATE_COOLED_SEATS = "activate_cooled_seats";
+
 }
