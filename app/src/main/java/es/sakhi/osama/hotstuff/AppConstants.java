@@ -22,4 +22,19 @@ public interface AppConstants {
     String EXPIRES_IN = "expires_in";
     String EXPIRATION_DATE = "expiration_date";
 
+//    Config Keys
+
+    String DEFROST_FRONT_WINDOW = "defrost_front_window";
+    String DEFROST_BACK_WINDOW = "defrost_back_window";
+    String AUTO_DEFROST = "auto_defrost";
+    String SET_TEMP_TO = "set_temp_to";
+    String AUTO_TEMP = "auto_temp";
+    String FIND_CLOSE_GAS = "find_close_gas";
+    String FIND_CHEAP_GAS = "find_cheap_gas";
+    String FIND_NO_GAS = "find_no_gas";
+    String ACTIVATE_HEATED_SEATS = "activate_heated_seats";
+    String ACTIVATE_COOLED_SEATS = "activate_cooled_seats";
+
+
+
 }

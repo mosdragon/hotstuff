@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pushToStart(View v) {
-        Button button = (Button) v;
+        RadioButton button = (RadioButton) v;
         if (!started) {
             button.setText("Starting Your Car");
             //CarStartService.startCar(this);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             button.setText("Push to Start");
 //            Stopping car
             CarStartService.stopCar(this);
-           // button.
+              button.setChecked(false);
 //            deselect radio button
 
         }

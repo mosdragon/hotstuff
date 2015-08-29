@@ -95,8 +95,15 @@
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/Set_Temp"
-                        android:layout_marginBottom="3dp" />
+                        android:id="@+id/Set_Temp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="    0                 25                50                 75                100"
+                        android:id="@+id/textView"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="-5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
