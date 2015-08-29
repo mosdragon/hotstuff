@@ -143,12 +143,20 @@ public class ConfigurationActivity extends AppCompatActivity {
         editor.putBoolean(AppConstants.ACTIVATE_COOLED_SEATS, shouldCoolSeats);
         editor.commit();
 
-        beginServices();
+//        beginServices();
         finish();
 
     }
 
     private void beginServices() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        CarDefrostService defrostService = new CarDefrostService();
+        CarDefrostService.startDefrostService(this);
 
+
+//        if (!(prefs.getBoolean(AppConstants.DEFROST_FRONT_WINDOW, false)) && !(prefs.getBoolean(AppConstants.AUTO_DEFROST, false)) &&
+//                !(prefs.getBoolean(AppConstants.DEFROST_BACK_WINDOW, false))) {
+//            CarDefrostService.startDefrostService(this);
+//        }
     }
 }

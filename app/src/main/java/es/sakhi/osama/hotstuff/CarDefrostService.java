@@ -5,7 +5,10 @@ import android.app.IntentService;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -41,6 +44,11 @@ public class CarDefrostService extends IntentService implements FetchWeatherTask
         context.startService(intent);
     }
 
+    public static void startDefrostService(Context context) {
+        Intent intent = new Intent(context, CarDefrostService.class);
+        context.startService(intent);
+    }
+
     /**
      * Starts this service to perform action Baz with the given parameters. If
      * the service is already performing a task this action will be queued.
@@ -63,16 +71,13 @@ public class CarDefrostService extends IntentService implements FetchWeatherTask
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
-            final String action = intent.getAction();
-            if (ACTION_FOO.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionFoo(param1, param2);
-            } else if (ACTION_BAZ.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionBaz(param1, param2);
-            }
+            Handler h = new Handler(Looper.getMainLooper());
+            h.post(new Runnable() {
+                @Override
+                public void run() {
+                    (new FetchWeatherTask(CarDefrostService.this)).execute();
+                }
+            });
         }
     }
 
@@ -98,47 +103,58 @@ public class CarDefrostService extends IntentService implements FetchWeatherTask
     }
 
     @Override
-    public void foundTemp(double temp) {
-        if (temp < 35){
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            Log.d("CarDefrostService", "Positive");
-                            dialog.dismiss();//Yes button clicked
-                            break;
+    public void foundTemp(final double temp) {
+        Log.d("temp", "" + temp);
+        Handler handler = new Handler(Looper.getMainLooper());
 
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            dialog.dismiss();//No button clicked
-                            break;
-                    }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (temp < 35){
+//                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            switch (which){
+//                                case DialogInterface.BUTTON_POSITIVE:
+//                                    Log.d("CarDefrostService", "Positive");
+//                                    dialog.dismiss();//Yes button clicked
+//                                    break;
+//
+//                                case DialogInterface.BUTTON_NEGATIVE:
+//                                    dialog.dismiss();//No button clicked
+//                                    break;
+//                            }
+//                        }
+//                    };
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(CarDefrostService.this);
+//                    builder.setMessage("The Temperature right now is " + temp + "ºF. Would you like to defrost?").setPositiveButton("Yes", dialogClickListener)
+//                            .setNegativeButton("No", dialogClickListener).show();
+                    Toast.makeText(CarDefrostService.this, "Your car will begin defrosting", Toast.LENGTH_LONG).show();
                 }
-            };
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("The Temperature right now is " + temp + "ºF. Would you like to defrost?").setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show();
-        }
-        if (temp > 70){
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            Log.d("CarACService", "Positive");
-                            dialog.dismiss();//Yes button clicked
-                            break;
-
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            dialog.dismiss();//No button clicked
-                            break;
-                    }
+                if (temp > 50){
+//                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            switch (which){
+//                                case DialogInterface.BUTTON_POSITIVE:
+//                                    Log.d("CarACService", "Positive");
+//                                    dialog.dismiss();//Yes button clicked
+//                                    break;
+//
+//                                case DialogInterface.BUTTON_NEGATIVE:
+//                                    dialog.dismiss();//No button clicked
+//                                    break;
+//                            }
+//                        }
+//                    };
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(CarDefrostService.this);
+//                    builder.setMessage("The Temperature right now is " + temp + "ºF. Would you like to turn on the AC?").setPositiveButton("Yes", dialogClickListener)
+//                            .setNegativeButton("No", dialogClickListener).show();
+                    Toast.makeText(CarDefrostService.this, "The current temperature is: " + temp + ". Your car will start without defrosting.", Toast.LENGTH_LONG).show();
                 }
-            };
+            }
+        });
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("The Temperature right now is " + temp + "ºF. Would you like to turn on the AC?").setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show();
-        }
     }
 }
