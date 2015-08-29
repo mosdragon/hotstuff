@@ -35,7 +35,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
     private Callback callback;
 
     public GetTokenTask(Callback callback) {
-        android.os.Debug.waitForDebugger();
+//        android.os.Debug.waitForDebugger();
         this.context = (Context) callback;
         this.callback = callback;
     }
