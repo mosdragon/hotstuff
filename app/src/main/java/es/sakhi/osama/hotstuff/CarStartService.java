@@ -3,6 +3,7 @@ package es.sakhi.osama.hotstuff;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.widget.Toast;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -14,12 +15,8 @@ import android.content.Context;
 public class CarStartService extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "es.sakhi.osama.hotstuff.action.FOO";
-    private static final String ACTION_BAZ = "es.sakhi.osama.hotstuff.action.BAZ";
-
-    // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "es.sakhi.osama.hotstuff.extra.PARAM1";
-    private static final String EXTRA_PARAM2 = "es.sakhi.osama.hotstuff.extra.PARAM2";
+    private static final String ACTION_START_CAR = "START_CAR";
+    private static final String ACTION_STOP_CAR = "STOP_CAR";
 
     /**
      * Starts this service to perform action Foo with the given parameters. If
@@ -28,11 +25,9 @@ public class CarStartService extends IntentService {
      * @see IntentService
      */
     // TODO: Customize helper method
-    public static void startActionFoo(Context context, String param1, String param2) {
+    public static void startCar(Context context) {
         Intent intent = new Intent(context, CarStartService.class);
-        intent.setAction(ACTION_FOO);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.setAction(ACTION_START_CAR);
         context.startService(intent);
     }
 
@@ -43,11 +38,9 @@ public class CarStartService extends IntentService {
      * @see IntentService
      */
     // TODO: Customize helper method
-    public static void startActionBaz(Context context, String param1, String param2) {
+    public static void stopCar(Context context) {
         Intent intent = new Intent(context, CarStartService.class);
-        intent.setAction(ACTION_BAZ);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.setAction(ACTION_STOP_CAR);
         context.startService(intent);
     }
 
@@ -59,14 +52,10 @@ public class CarStartService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_FOO.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionFoo(param1, param2);
-            } else if (ACTION_BAZ.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionBaz(param1, param2);
+            if (ACTION_START_CAR.equals(action)) {
+                handleCarStart();
+            } else if (ACTION_STOP_CAR.equals(action)) {
+                handleCarStop();
             }
         }
     }
@@ -75,17 +64,19 @@ public class CarStartService extends IntentService {
      * Handle action Foo in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void handleCarStart() {
+        // TODO: Handle action Start Car
+//        throw new UnsupportedOperationException("Not yet implemented");
+        Toast.makeText(getBaseContext(), "Car Starting", Toast.LENGTH_LONG).show();
     }
 
     /**
      * Handle action Baz in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void handleCarStop() {
+        // TODO: Handle action Stop Car
+//        throw new UnsupportedOperationException("Not yet implemented");
+        Toast.makeText(getBaseContext(), "Car Stopping", Toast.LENGTH_LONG).show();
     }
 }
