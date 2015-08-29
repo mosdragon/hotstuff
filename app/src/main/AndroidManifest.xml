@@ -16,6 +16,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ConfigurationActivity"
+            android:label="@string/title_activity_configuration"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.sakhi.osama.hotstuff.MainActivity" />
+        </activity>
+
+        <service
+            android:name=".GasService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".DeviceMusicService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".CarDefrostService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".CarStartService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
