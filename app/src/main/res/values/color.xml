@@ -2,6 +2,7 @@
 <resources>
 
     <color name="accent">#7C4DFF</color>
+    <color name="accentLight">#7C4DFF</color>
     <color name="primary">#FFC107</color>
     <color name="primaryDark">#FFA000</color>
 
